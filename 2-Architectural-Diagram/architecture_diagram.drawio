@@ -1,0 +1,191 @@
+<mxfile host="app.diagrams.net" modified="2026-10-02T18:25:00.000Z" agent="5.0" version="21.0.0" type="device">
+  <diagram id="hostel-architecture-diagram" name="Hostel Maintenance Architectural Diagram">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="920" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Background Canvas -->
+        <mxCell id="canvas_bg" value="" style="shape=rect;html=1;whiteSpace=wrap;fillColor=#ffffff;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1100" height="920" as="geometry" />
+        </mxCell>
+
+        <!-- TITLE BAR -->
+        <mxCell id="title_box" value="Hostel Maintenance &amp;amp; Issue Ticketing System — Software Architecture (4-Tier Layered Architecture)" style="shape=rect;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontStyle=1;fontSize=14;fillColor=#f5f5f5;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1020" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== TIER 1: PRESENTATION LAYER ==================== -->
+        <mxCell id="tier1_container" value="1. Presentation &amp;amp; Client Interface Layer (Stakeholders)" style="shape=rect;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=15;spacingTop=8;fontStyle=1;fontSize=12;fillColor=#fafafa;strokeColor=#000000;strokeWidth=1.2;fontColor=#000000;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="75" width="1020" height="115" as="geometry" />
+        </mxCell>
+
+        <mxCell id="client_resident" value="&lt;b&gt;Hostel Resident Client&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;(Web &amp;amp; Mobile App)&lt;br&gt;Ticket Logging (Room Tag, Category)&lt;br&gt;Photo Upload &amp;amp; Closure Sign-Off / Reopen&lt;/font&gt;" style="shape=rect;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="70" y="105" width="280" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="client_warden" value="&lt;b&gt;Maintenance Warden Portal&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;(Web Management Console)&lt;br&gt;Ticket Triage Queue, Staff Allocation&lt;br&gt;SLA Tracking &amp;amp; Escalation Monitoring&lt;/font&gt;" style="shape=rect;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="410" y="105" width="280" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="client_staff" value="&lt;b&gt;Maintenance Staff Field App&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;(Mobile Work Order App)&lt;br&gt;Assigned Worklist, Status Progression&lt;br&gt;Geo-Tagged Proof-of-Work Photo Upload&lt;/font&gt;" style="shape=rect;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="750" y="105" width="280" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== TIER 2: API GATEWAY & SECURITY ==================== -->
+        <mxCell id="tier2_container" value="2. API Gateway &amp;amp; Security Layer" style="shape=rect;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=15;spacingTop=8;fontStyle=1;fontSize=12;fillColor=#fafafa;strokeColor=#000000;strokeWidth=1.2;fontColor=#000000;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="210" width="1020" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="api_gateway" value="&lt;b&gt;API Gateway &amp;amp; Reverse Proxy&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;HTTPS Termination, Rate Limiting (500 req/hr), Load Balancing, Endpoint Routing&lt;/font&gt;" style="shape=rect;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="70" y="238" width="460" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="auth_middleware" value="&lt;b&gt;Authentication &amp;amp; RBAC Middleware&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;JWT Token Verification, Role Access Control (Resident, Warden, Staff), Session Validation&lt;/font&gt;" style="shape=rect;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="570" y="238" width="460" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== TIER 3: APPLICATION SERVICES ==================== -->
+        <mxCell id="tier3_container" value="3. Application &amp;amp; Business Logic Layer (Core Microservices)" style="shape=rect;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=15;spacingTop=8;fontStyle=1;fontSize=12;fillColor=#fafafa;strokeColor=#000000;strokeWidth=1.2;fontColor=#000000;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="325" width="1020" height="260" as="geometry" />
+        </mxCell>
+
+        <!-- Row 1 of Services -->
+        <mxCell id="svc_ticket" value="&lt;b&gt;Ticket Management Service&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;[FR-001, FR-003]&lt;br&gt;Issue logging, severity classification,&lt;br&gt;room number validation, lifecycle state engine&lt;br&gt;(Logged -&amp;gt; Assigned -&amp;gt; In-Progress -&amp;gt; Resolved)&lt;/font&gt;" style="shape=rect;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="70" y="360" width="280" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="svc_dispatch" value="&lt;b&gt;Dispatch &amp;amp; Assignment Service&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;[FR-002]&lt;br&gt;Warden queue triage, technician availability,&lt;br&gt;skill-based task delegation (Plumber, Electrician),&lt;br&gt;work order lifecycle management&lt;/font&gt;" style="shape=rect;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="410" y="360" width="280" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="svc_geotag" value="&lt;b&gt;Geo-Tag &amp;amp; Media Service&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;[FR-004]&lt;br&gt;EXIF GPS extraction, coordinate verification&lt;br&gt;against hostel block boundary,&lt;br&gt;proof-of-work photo validation&lt;/font&gt;" style="shape=rect;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="750" y="360" width="280" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- Row 2 of Services -->
+        <mxCell id="svc_sla" value="&lt;b&gt;SLA &amp;amp; Escalation Engine&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;[NFR-001, FR-003]&lt;br&gt;Real-time SLA countdown timers,&lt;br&gt;automated 24-hr threshold breach detector,&lt;br&gt;high-priority escalation pipeline&lt;/font&gt;" style="shape=rect;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="70" y="475" width="280" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="svc_closure" value="&lt;b&gt;Closure &amp;amp; Verification Service&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;[FR-005]&lt;br&gt;Resident inspection workflow,&lt;br&gt;closure sign-off verification,&lt;br&gt;ticket reopen trigger &amp;amp; satisfaction rating&lt;/font&gt;" style="shape=rect;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="410" y="475" width="280" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="svc_notification" value="&lt;b&gt;Notification &amp;amp; Messaging Service&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;[NFR-001]&lt;br&gt;Push notification dispatcher,&lt;br&gt;status transition broadcasts, emergency SMS/Email&lt;br&gt;escalation alerts for warden and admin&lt;/font&gt;" style="shape=rect;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="750" y="475" width="280" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== TIER 4: DATA PERSISTENCE & STORAGE ==================== -->
+        <mxCell id="tier4_container" value="4. Data Persistence &amp;amp; Infrastructure Layer" style="shape=rect;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=15;spacingTop=8;fontStyle=1;fontSize=12;fillColor=#fafafa;strokeColor=#000000;strokeWidth=1.2;fontColor=#000000;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="610" width="650" height="180" as="geometry" />
+        </mxCell>
+
+        <mxCell id="db_rdbms" value="&lt;b&gt;Relational Database&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;(PostgreSQL / MySQL)&lt;br&gt;Tickets, Users, Room Tags,&lt;br&gt;Staff Assignments, Audit Trail,&lt;br&gt;SLA Timestamps &amp;amp; Logs&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;fontSize=11;align=center;" vertex="1" parent="1">
+          <mxGeometry x="70" y="650" width="180" height="115" as="geometry" />
+        </mxCell>
+
+        <mxCell id="db_objectstore" value="&lt;b&gt;Object Storage&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;(AWS S3 / MinIO)&lt;br&gt;Resident Issue Attachments,&lt;br&gt;Geo-Tagged Proof-of-Work&lt;br&gt;Repair Photos, Thumbnails&lt;/font&gt;" style="shape=rect;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="280" y="665" width="180" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="db_cache" value="&lt;b&gt;In-Memory Cache &amp;amp; Queue&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;(Redis / RabbitMQ)&lt;br&gt;Active Sessions, Real-Time&lt;br&gt;Status Cache, SLA Timer Queue,&lt;br&gt;Escalation Event Pub/Sub&lt;/font&gt;" style="shape=rect;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="490" y="665" width="180" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== TIER 5: EXTERNAL SERVICES ==================== -->
+        <mxCell id="tier5_container" value="5. External Systems &amp;amp; Gateways" style="shape=rect;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingLeft=15;spacingTop=8;fontStyle=1;fontSize=12;fillColor=#fafafa;strokeColor=#000000;strokeWidth=1.2;fontColor=#000000;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="610" width="340" height="180" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ext_sms" value="&lt;b&gt;SMS &amp;amp; Email Gateway&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;(Twilio / AWS SNS / SendGrid)&lt;br&gt;Automated 24-hr Escalation Alerts (NFR-001)&lt;br&gt;&amp;amp; Ticket Dispatch Notifications&lt;/font&gt;" style="shape=rect;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="750" y="650" width="280" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ext_gps" value="&lt;b&gt;Hostel GIS &amp;amp; Geo-Fence Service&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;(Campus Map / Geocoding API)&lt;br&gt;Campus Boundary Polygon Verification&lt;br&gt;&amp;amp; Hardware GPS Metadata Validation&lt;/font&gt;" style="shape=rect;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="750" y="720" width="280" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== FOOTER / METADATA ==================== -->
+        <mxCell id="footer_bar" value="Design Principles: Modular Microservices | Defense-in-Depth Security (RBAC + TLS 1.3) | Geo-tag Location Integrity | SLA Automation" style="shape=rect;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;fontStyle=0;fontSize=10;fillColor=#f5f5f5;strokeColor=#000000;strokeWidth=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="40" y="805" width="1020" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== CONNECTORS / EDGES ==================== -->
+        <!-- Tier 1 to Tier 2 -->
+        <mxCell id="edge_c1_gw" value="HTTPS / REST" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontSize=10;fontColor=#000000;" edge="1" parent="1" source="client_resident" target="api_gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_c2_gw" value="HTTPS / REST" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontSize=10;fontColor=#000000;" edge="1" parent="1" source="client_warden" target="api_gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_c3_gw" value="HTTPS / REST" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontSize=10;fontColor=#000000;" edge="1" parent="1" source="client_staff" target="auth_middleware">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_gw_auth" value="Validate JWT &amp;amp; Role" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.2;fontSize=10;fontColor=#000000;dashed=1;" edge="1" parent="1" source="api_gateway" target="auth_middleware">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Tier 2 to Tier 3 -->
+        <mxCell id="edge_gw_ticket" value="Route Ticket Ops" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;strokeWidth=1.2;fontSize=10;fontColor=#000000;" edge="1" parent="1" source="api_gateway" target="svc_ticket">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_gw_dispatch" value="Route Dispatch" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;strokeWidth=1.2;fontSize=10;fontColor=#000000;" edge="1" parent="1" source="api_gateway" target="svc_dispatch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_gw_geotag" value="Route Proof Upload" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;strokeWidth=1.2;fontSize=10;fontColor=#000000;" edge="1" parent="1" source="auth_middleware" target="svc_geotag">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Inter-Service Flows in Tier 3 -->
+        <mxCell id="edge_ticket_sla" value="Status Event" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;strokeWidth=1.2;fontSize=9;fontColor=#000000;" edge="1" parent="1" source="svc_ticket" target="svc_sla">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_ticket_dispatch" value="Assign Tech" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.2;fontSize=9;fontColor=#000000;" edge="1" parent="1" source="svc_ticket" target="svc_dispatch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_closure_ticket" value="Sign-Off / Reopen" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;strokeWidth=1.2;fontSize=9;fontColor=#000000;" edge="1" parent="1" source="svc_closure" target="svc_ticket">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_sla_notify" value="Trigger Escalation (NFR-001)" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;strokeWidth=1.2;fontSize=9;fontColor=#000000;" edge="1" parent="1" source="svc_sla" target="svc_notification">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_geotag_closure" value="Verify Work Photo" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;strokeWidth=1.2;fontSize=9;fontColor=#000000;" edge="1" parent="1" source="svc_geotag" target="svc_closure">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Tier 3 to Tier 4 -->
+        <mxCell id="edge_svc_db" value="ACID CRUD Operations" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;strokeWidth=1.2;fontSize=10;fontColor=#000000;" edge="1" parent="1" source="svc_ticket" target="db_rdbms">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_geotag_s3" value="Upload Photo" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;strokeWidth=1.2;fontSize=10;fontColor=#000000;" edge="1" parent="1" source="svc_geotag" target="db_objectstore">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_sla_redis" value="Timer Queue &amp;amp; Pub/Sub" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.2;fontSize=10;fontColor=#000000;" edge="1" parent="1" source="svc_sla" target="db_cache">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Tier 3 to Tier 5 -->
+        <mxCell id="edge_notify_sms" value="SMS/Email Dispatch" style="endArrow=block;endFill=1;html=1;strokeColor=#000000;strokeWidth=1.2;fontSize=10;fontColor=#000000;" edge="1" parent="1" source="svc_notification" target="ext_sms">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge_geotag_gps" value="Validate Coordinates" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#000000;strokeWidth=1.2;fontSize=10;fontColor=#000000;" edge="1" parent="1" source="svc_geotag" target="ext_gps">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
