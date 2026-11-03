@@ -1,9 +1,6 @@
 # 1-RE: Requirements Engineering
 
-**Course:** Software Engineering Lab (Dept. of CSE, PES University)  
 **Problem Statement #07:** Hostel Maintenance & Issue Ticketing System  
-**Primary Domain:** Campus & Academic Operations  
-**Target Stakeholders / Actors:** Hostel Resident, Maintenance Warden, Maintenance Staff  
 
 ---
 
