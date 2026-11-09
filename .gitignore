@@ -2,3 +2,7 @@ UML_diagram.drawio
 
 .venv
 venv
+__pycache__/
+.pytest_cache/
+.hypothesis/
+
