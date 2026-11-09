@@ -1,0 +1,16 @@
+# Lab 5 – Identified Issues
+
+Tool versions used: Pylint 4.1.3 · Bandit 1.9.4 · Flake8 7.4.1
+
+| # | Issue | Type | Line(s) | Severity | Description | Fix Approach |
+|---|-------|------|---------|----------|-------------|--------------|
+| 1 | Mutable default argument | Bug / Style | 11 | High | `logs=[]` is evaluated once at function definition time; every call that omits `logs` shares the **same** list, so entries accumulate across calls instead of starting fresh. | Replace default with `None` and assign `logs = []` inside the function body when `logs is None`. |
+| 2 | `KeyError` crash after `remove_route` | Bug | 58 | High | `remove_route("R3")` deletes R3, but line 58 calls `average_load("R3")` unconditionally, raising `KeyError` and crashing the program. | Make `average_load` return `None` for unknown/empty routes and guard the call site with an `if` check. |
+| 3 | Negative / non-integer passenger counts accepted | Bug | 48–50 | High | `-6` and `"full"` are silently stored as passenger counts, corrupting the average calculation and producing nonsensical results. | Validate that `passenger_count` is a non-negative `int` before appending; warn and skip otherwise. |
+| 4 | Bare `except:` clause swallows all errors | Bug / Security | 29 | Medium | `except:` catches *everything* including `KeyboardInterrupt` and `SystemExit`, hiding real bugs and making the program harder to debug. (Bandit B110, Flake8 E722, Pylint W0702) | Replace with `except (KeyError, ZeroDivisionError):` – or, better, refactor so the exception is unnecessary (check length before dividing). |
+| 5 | File not closed if an exception is raised | Style / Resource | 39–43 | Medium | `open()` is called manually then `close()` is never guaranteed because there is no `try/finally`. A write error would leave the file handle open. (Pylint R1732) | Use `with open(...) as fh:` context managers for both the write and the read. |
+| 6 | `open()` without explicit encoding | Style | 39, 42 | Medium | Relying on the platform default encoding makes the code non-portable – the file may be written in one encoding and read in another. (Pylint W1514) | Pass `encoding="utf-8"` to every `open()` call. |
+| 7 | `global routes` statement in `sync_fleet_data` | Style | 38 | Medium | Reassigning the global variable is fragile; any other code holding a reference to the old dict will not see the update. (Pylint W0603) | Instead of replacing the reference, `clear()` the existing dict and `update()` it with the loaded data, removing the need for `global`. |
+| 8 | Function name violates snake_case convention | Style | 33 | Low | `assignDriver` uses camelCase; PEP 8 and Pylint (C0103) require `snake_case` for function names. | Rename to `assign_driver` throughout the file. |
+| 9 | Missing docstrings | Style | 11,16,19,23,33,37,45 | Low | Every function (and the module) lacks a docstring, reducing readability and tool-generated documentation quality. (Pylint C0114, C0116) | Add a one-line or multi-line docstring to every function and to the module. |
+| 10 | `%`-style string formatting | Style | 13 | Low | `"%s: %s carried %s" % (...)` is the old format style; f-strings are cleaner and faster. (Pylint C0209) | Rewrite as an f-string: `f"{datetime.now()}: {route_id} carried {passenger_count}"`. |
