@@ -7,7 +7,7 @@ def parse_vitals_summary(vitals_csv):
     Returns a formatted summary string with triage priority ('CRITICAL' or 'STABLE')
     or an informative error string if inputs are malformed or invalid.
     """
-    if vitals_csv is None or not isinstance(vitals_csv, str):
+    if vitals_csv is None or not isinstance(vitals_csv, str) or not vitals_csv.strip():
         return "Error: Invalid vitals data. Input must be a non-empty string in format 'HR,SpO2,Temp'."
 
     parts = [p.strip() for p in vitals_csv.split(',')]
@@ -42,7 +42,7 @@ def compute_patient_bmi(bmi_string):
     Computes BMI from a string in format 'weight/height' (e.g., '70/1.75').
     Returns the rounded BMI value (2 decimal places) or an informative error string.
     """
-    if bmi_string is None or not isinstance(bmi_string, str):
+    if bmi_string is None or not isinstance(bmi_string, str) or not bmi_string.strip():
         return "Error: Invalid BMI data. Input must be a string in format 'weight/height'."
 
     parts = [p.strip() for p in bmi_string.split('/')]
@@ -78,7 +78,7 @@ def assign_ward_bed(allocation_code):
     Assigns a ward and bed number based on allocation code 'WARD-BED' (e.g. 'ICU-05').
     Returns formatted assignment string or an informative error string.
     """
-    if allocation_code is None or not isinstance(allocation_code, str):
+    if allocation_code is None or not isinstance(allocation_code, str) or not allocation_code.strip():
         return "Error: Invalid allocation code. Input must be a string in format 'WARD-BED'."
 
     parts = [p.strip() for p in allocation_code.strip().split('-')]
@@ -98,10 +98,13 @@ def assign_ward_bed(allocation_code):
         valid_wards = ", ".join(ward_names.keys())
         return f"Error: Unknown ward code '{ward}'. Valid wards are: {valid_wards}."
 
-    try:
-        bed_num = int(bed_str)
-    except (ValueError, TypeError):
+    # ``int`` accepts a few Python-specific spellings such as "1_0".  A
+    # ward allocation is an external identifier, so keep its bed portion to
+    # ordinary decimal digits instead of silently turning ICU-1_0 into bed 10.
+    if not bed_str.isascii() or not bed_str.isdigit():
         return "Error: Invalid bed number. Bed number must be an integer."
+
+    bed_num = int(bed_str)
 
     if bed_num <= 0:
         return "Error: Bed number must be a positive integer."

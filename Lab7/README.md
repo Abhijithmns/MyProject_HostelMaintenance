@@ -10,9 +10,16 @@ A set of property-based fuzz tests targeting patient vitals summaries, BMI calcu
 
 | File | Description |
 |------|-------------|
-| `processor.py` | The module under test (buggy starter code) |
-| `test_processor.py` | Starter test file to complete using Hypothesis |
+| `processor.py` | Input-processing module, including fixes found during fuzz testing |
+| `test_processor.py` | Property-based tests written with Hypothesis |
+| `fuzzing_report.md` | Test approach, findings, fixes, and results |
 
-Keep all your Lab 7 work in this `LAB7` folder.
+## Run the tests
+
+```bash
+python -m pytest -q test_processor.py
+```
+
+Keep all your Lab 7 work in this `Lab7` folder.
 
 Refer to the lab handout for instructions.
